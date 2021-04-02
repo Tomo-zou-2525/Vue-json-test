@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <!-- v-forでtodoの中身を全て表示させる -->
+        <li v-for="todo in todos">
+          <!-- v-modelでinputの中身をVueオブジェクトに結びつける -->
+          <input type="text" v-model="todo.title" />
+          <!-- v-onでイベントを指定→click -->
+          <!-- 編集？ v-modelで入力値をリアルタイムで反映させるのか？ -->
+          <input type="button" value="Edit" @click="todoEdit" />
+          <!-- v-onでイベントを指定→click -->
+          <!-- jsで削除のメソッドがあるのか？、または””のように空白をいれるのか？ -->
+          <input type="button" value="Delete" @click="todoDelete" />
+        </li>
+      </ul>
+      <!-- v-onでイベントを指定→click -->
+      <!-- 入力した値を保存するメソッド まるでわからん→普通にv-model -->
+      <input type="text" v-model="new_todo" />
+      <!-- v-onでイベントを指定→click -->
+      ボタンに対して保存させるメソッドをつけるのか？
+      <input type="button" value="追加" @click="todoCreate" />
+    </div>
+  </body>
+</html>
