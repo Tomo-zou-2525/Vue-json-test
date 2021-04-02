@@ -1,6 +1,6 @@
 new Vue({
   el: "#app",
-  date: {
+  data: {
     todos: [],
     new_todo: null
   },
@@ -8,17 +8,17 @@ new Vue({
     this.read();
   },
   methods: {
-    //一覧描画
-    //fetchでHTTP通信をする
+    // 一覧描画
     read() {
       fetch("http://localhost:3000/todos")
-        .then(res => res.join())
+        .then(res => res.json())
         .then(res => (this.todos = res));
     },
-    //新規追加
-    todoCreate() {
+
+    // 新規追加
+    create() {
       fetch("http://localhost:3000/todos", {
-        methods: "POST",
+        method: "POST",
         body: JSON.stringify({
           title: this.new_todo
         }),
@@ -31,21 +31,19 @@ new Vue({
       });
     },
 
-    //編集
-    todoEdit(todo) {
+    // 編集
+    update(todo) {
       fetch(`http://localhost:3000/todos/${todo.id}`, {
         method: "PUT",
         body: JSON.stringify({
           title: todo.title
         }),
-        headers: new Headers({
-          "Content-type": "application/json"
-        })
+        headers: new Headers({ "Content-type": "application/json" })
       });
     },
 
-    //削除
-    todoDelete(todo) {
+    // 削除
+    remove(todo) {
       fetch(`http://localhost:3000/todos/${todo.id}`, {
         method: "DELETE"
       }).then(() => {
